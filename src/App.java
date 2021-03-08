@@ -1,6 +1,7 @@
 import builder.ContainerConfig;
 import factorymethod.FileManager;
 import factorymethod.FileManagerFactory;
+import singleton.MyOnlyOne;
 
 public class App {
     public static void main(String[] args) throws Exception {
@@ -11,6 +12,9 @@ public class App {
         System.out.println("");
 
         runBuilderExample();
+        System.out.println("");
+
+        runSingletonExample();
         System.out.println("");
     }
 
@@ -42,5 +46,19 @@ public class App {
         System.out.println("--- autoRestart: " + config2.isAutoRestart());
 
         System.out.println("--- Builder Example End! ---");
+    }
+
+    private static void runSingletonExample() {
+        System.out.println("--- Singleton Example Start! ---");
+
+        System.out.println("Create the First Object");
+        MyOnlyOne moo1 = MyOnlyOne.getMyOnlyOne();
+        System.out.println("--- hashCode: " + moo1.hashCode());
+
+        System.out.println("Create the Second Object");
+        MyOnlyOne moo2 = MyOnlyOne.getMyOnlyOne();
+        System.out.println("--- hashCode: " + moo2.hashCode());
+
+        System.out.println("--- Singleton Example End! ---");
     }
 }
