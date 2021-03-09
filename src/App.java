@@ -1,4 +1,8 @@
 import builder.ContainerConfig;
+import decorator.BlackAndWhiteDecorator;
+import decorator.CuteDecorator;
+import decorator.PhotoPrinter;
+import decorator.Printer;
 import factorymethod.FileManager;
 import factorymethod.FileManagerFactory;
 import singleton.MyOnlyOne;
@@ -15,6 +19,9 @@ public class App {
         System.out.println("");
 
         runSingletonExample();
+        System.out.println("");
+
+        runDecoratorExample();
         System.out.println("");
     }
 
@@ -60,5 +67,25 @@ public class App {
         System.out.println("--- hashCode: " + moo2.hashCode());
 
         System.out.println("--- Singleton Example End! ---");
+    }
+
+    private static void runDecoratorExample() {
+        System.out.println("--- Decorator Example Start! ---");
+
+        Printer p = new PhotoPrinter();
+        System.out.println("--- Default Printer: " + p.print("my-photo"));
+
+        Printer pCuteFiltered = new CuteDecorator(new PhotoPrinter());
+        System.out.println("--- Default Printer with Cute Filter: " + pCuteFiltered.print("my-photo"));
+
+        Printer pBlackAndWhiteFiltered = new BlackAndWhiteDecorator(new PhotoPrinter());
+        System.out
+                .println("--- Default Printer with BlackAndWhite Filter: " + pBlackAndWhiteFiltered.print("my-photo"));
+
+        Printer pCuteAndBlackAndWhiteFiltered = new CuteDecorator(new BlackAndWhiteDecorator(new PhotoPrinter()));
+        System.out.println("--- Default Printer with Cute Filter and BlackAndWhite Filter: "
+                + pCuteAndBlackAndWhiteFiltered.print("my-photo"));
+
+        System.out.println("--- Decorator Example End! ---");
     }
 }
