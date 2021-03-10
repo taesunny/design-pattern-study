@@ -1,4 +1,7 @@
 import builder.ContainerConfig;
+import command.ContainerGCCommand;
+import command.GCController;
+import command.ImageGCCommand;
 import decorator.BlackAndWhiteDecorator;
 import decorator.CuteDecorator;
 import decorator.PhotoPrinter;
@@ -23,10 +26,13 @@ public class App {
 
         runDecoratorExample();
         System.out.println("");
+
+        runCommandExample();
+        System.out.println("");
     }
 
     private static void runFactoryMethodExample() {
-        System.out.println("--- Factory Method Example Start! ---");
+        System.out.println("--- Factory Method Pattern Example Start! ---");
 
         FileManager nfsFM = FileManagerFactory.getFileManager("NFS");
         nfsFM.createAFile("test-name", "test-content");
@@ -36,11 +42,11 @@ public class App {
         localFM.createAFile("test-name", "test-content");
         localFM.deleteAFile("test-name");
 
-        System.out.println("--- Factory Method Example End! ---");
+        System.out.println("--- Factory Method Pattern Example End! ---");
     }
 
     private static void runBuilderExample() {
-        System.out.println("--- Builder Example Start! ---");
+        System.out.println("--- Builder Pattern Example Start! ---");
 
         System.out.println("Container Config1:");
         ContainerConfig config1 = new ContainerConfig.Builder("name1", "ubuntu").port(80).autoRestart(true).build();
@@ -52,11 +58,11 @@ public class App {
         System.out.println("--- port: " + config2.getPort());
         System.out.println("--- autoRestart: " + config2.isAutoRestart());
 
-        System.out.println("--- Builder Example End! ---");
+        System.out.println("--- Builder Pattern Example End! ---");
     }
 
     private static void runSingletonExample() {
-        System.out.println("--- Singleton Example Start! ---");
+        System.out.println("--- Singleton Pattern Example Start! ---");
 
         System.out.println("Create the First Object");
         MyOnlyOne moo1 = MyOnlyOne.getMyOnlyOne();
@@ -66,11 +72,11 @@ public class App {
         MyOnlyOne moo2 = MyOnlyOne.getMyOnlyOne();
         System.out.println("--- hashCode: " + moo2.hashCode());
 
-        System.out.println("--- Singleton Example End! ---");
+        System.out.println("--- Singleton Pattern Example End! ---");
     }
 
     private static void runDecoratorExample() {
-        System.out.println("--- Decorator Example Start! ---");
+        System.out.println("--- Decorator Pattern Example Start! ---");
 
         Printer p = new PhotoPrinter();
         System.out.println("--- Default Printer: " + p.print("my-photo"));
@@ -86,6 +92,26 @@ public class App {
         System.out.println("--- Default Printer with Cute Filter and BlackAndWhite Filter: "
                 + pCuteAndBlackAndWhiteFiltered.print("my-photo"));
 
-        System.out.println("--- Decorator Example End! ---");
+        System.out.println("--- Decorator Pattern Example End! ---");
+    }
+
+    private static void runCommandExample() {
+        System.out.println("--- Command Pattern Example Start! ---");
+
+        ImageGCCommand imageGCCommand = new ImageGCCommand();
+        ContainerGCCommand containerGCCommand = new ContainerGCCommand();
+
+        GCController gcController = new GCController();
+
+        gcController.setImageGCControllerCommand(imageGCCommand);
+        gcController.setContainerGCCommand(containerGCCommand);
+
+        System.out.println("--- Try GC");
+        gcController.gc();
+
+        System.out.println("--- I want to revertAll Commands");
+        gcController.revertAll();
+
+        System.out.println("--- Command Pattern Example End! ---");
     }
 }
