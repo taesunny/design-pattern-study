@@ -9,6 +9,7 @@ import decorator.Printer;
 import factorymethod.FileManager;
 import factorymethod.FileManagerFactory;
 import singleton.MyOnlyOne;
+import strategy.StrategyPatternRunner;
 
 public class App {
     public static void main(String[] args) throws Exception {
@@ -28,6 +29,9 @@ public class App {
         System.out.println("");
 
         runCommandExample();
+        System.out.println("");
+
+        new StrategyPatternRunner("Strategy").run();
         System.out.println("");
     }
 
