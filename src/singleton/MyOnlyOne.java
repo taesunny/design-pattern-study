@@ -3,6 +3,9 @@ package singleton;
 public class MyOnlyOne {
     private static MyOnlyOne moo = null;
 
+    private MyOnlyOne() {
+    }
+
     // way 1 to prevent race condition
     // private static MyOnlyOne moo = new MyOnlyOne();
 

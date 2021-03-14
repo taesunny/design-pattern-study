@@ -1,7 +1,5 @@
 package builder;
 
-import java.util.Map;
-
 public class ContainerConfig {
     private final String name;
     private final String image;
