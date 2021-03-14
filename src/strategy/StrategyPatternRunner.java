@@ -4,8 +4,8 @@ import runner.DesignPatternRunner;
 
 public class StrategyPatternRunner extends DesignPatternRunner {
 
-    public StrategyPatternRunner(String name) {
-        super(name);
+    public StrategyPatternRunner() {
+        super("Strategy");
     }
 
     @Override

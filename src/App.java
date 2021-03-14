@@ -8,6 +8,7 @@ import decorator.PhotoPrinter;
 import decorator.Printer;
 import factorymethod.FileManager;
 import factorymethod.FileManagerFactory;
+import iterator.IteratorPatternRunner;
 import singleton.MyOnlyOne;
 import strategy.StrategyPatternRunner;
 
@@ -31,7 +32,10 @@ public class App {
         runCommandExample();
         System.out.println("");
 
-        new StrategyPatternRunner("Strategy").run();
+        new StrategyPatternRunner().run();
+        System.out.println("");
+
+        new IteratorPatternRunner().run();
         System.out.println("");
     }
 
